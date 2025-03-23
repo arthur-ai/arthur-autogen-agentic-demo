@@ -1,0 +1,26 @@
+{
+  "tools": {
+    "fetch_stock_data": {
+      "name": "StockInfoTool",
+      "eval_engine_model": "INSERT_EVAL_MODEL_ID_HERE"
+    },
+    "ai_powered_stock_screener": {
+      "name": "StockScreenerTool",
+      "eval_engine_model": "INSERT_EVAL_MODEL_ID_HERE"
+    },
+    "default": {
+      "name": "Default",
+      "eval_engine_model": "INSERT_EVAL_MODEL_ID_HERE"
+    }
+  },
+  "agents": {
+      "OrchestratorAgent": {
+        "name": "orchestrator",
+        "eval_engine_model": "INSERT_EVAL_MODEL_ID_HERE"
+      },
+      "ValidatorAgent": {
+        "name": "validator",
+        "eval_engine_model": "INSERT_EVAL_MODEL_ID_HERE"
+      }
+  }
+}

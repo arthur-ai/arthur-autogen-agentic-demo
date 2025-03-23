@@ -1,0 +1,10 @@
+{
+    "provider": "PROVIDER",
+    "config": {
+        "model": "MODEL NAME",
+        "azure_endpoint": "AZURE_URL",
+        "azure_deployment": "MODEL AZURE_DEPLOYMENT",
+        "api_version": "DATE",
+        "api_key": ""
+    }
+}
