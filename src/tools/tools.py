@@ -12,12 +12,13 @@ import os
 from dotenv import load_dotenv
 from scipy.stats import norm
 import math
+from src.utils.logger import get_logger
 
 load_dotenv()  # Load environment variables from .env file
 ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")
 # Modified logger setup with datestamp in filename
 current_date = datetime.now().strftime('%Y-%m-%d')
-from src.utils.logger import get_logger
+
 
 logger = get_logger(__name__)
 
