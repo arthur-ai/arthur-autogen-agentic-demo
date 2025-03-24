@@ -7,14 +7,14 @@
 # Arthur AutoGen Agent Demo
 
 ## Overview
-This project provides an example of how Arthur Evaluation Engine can be used to protect an Agentic Application. 
+This project provides an example of how Arthur Engine can be used to protect an Agentic Application. 
 
 The agentic use-case in this repository is a Financial Analyst Agent that utilizes a handful of tools to query external systems used in 
 generating responses about a user's financial queries.
 
 ## Key Features
 - **Intelligent Stock Analysis**: Real-time market data processing and analysis
-- **Safety First**: Integration with Arthur Evaluation Engine for response validation
+- **Safety First**: Integration with Arthur Engine for response validation
 - **Multi-Agent System**: Coordinated interaction between specialized AI agents
 
 ## Prerequisites
@@ -22,7 +22,7 @@ generating responses about a user's financial queries.
 - Required Python packages (detailed in requirements.txt)
 - Azure OpenAI API access and credentials
 - Alpha Vantage API key for financial data access
-- Arthur Evaluation Engine API credentials and access
+- Arthur Engine API credentials and access
 
 ## Installation
 
@@ -136,7 +136,7 @@ The application uses a multi-agent architecture:
    - Provides stock predictions and insights
 
 ### Safety Integration
-The system leverages Arthur Evaluation Engine's capabilities for:
+The system leverages Arthur Engine's capabilities for:
 - Content validation and quality assurance
 - Response appropriateness checking
 - Safety boundary enforcement
