@@ -83,16 +83,17 @@ VALIDATOR_SYSTEM_MESSAGE = """
                         """
 
 
-
-def format_resolution_text(message_content: str, result: str, tool_validation_message: str) -> str:
+def format_resolution_text(
+    message_content: str, result: str, tool_validation_message: str
+) -> str:
     """
     Formats the resolution text for the AI assistant response.
-    
+
     Args:
         message_content (str): The original user query
         result (str): The generated response/result
         tool_validation_message (str): Validation messages from tools
-        
+
     Returns:
         str: Formatted resolution text
     """

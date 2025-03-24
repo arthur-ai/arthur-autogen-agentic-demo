@@ -18,59 +18,53 @@ from typing import Any, Dict, Optional
 from autogen_core import DefaultTopicId, SingleThreadedAgentRuntime
 from autogen_core.models import ChatCompletionClient
 
+from .agents import OrchestratorAgent, SlowUserProxyAgent
 from .arthur_eval_engine import load_eval_engine_config
-from .core import (
-    NeedsUserInputHandler,
-    TerminationHandler,
-    MockPersistence,
-    AssistantTextMessage,
-    UserTextMessage
-)
-from .agents import SlowUserProxyAgent, OrchestratorAgent
+from .core import (AssistantTextMessage, MockPersistence,
+                   NeedsUserInputHandler, TerminationHandler, UserTextMessage)
 
 logger = logging.getLogger(__name__)
+
 
 class WorkflowManager:
     def __init__(self):
         self.state_persister = MockPersistence()
 
     async def trigger_agentic_workflow(
-        self,
-        config_file: Dict[str, Any],
-        latest_user_input: Optional[str] = None
+        self, config_file: Dict[str, Any], latest_user_input: Optional[str] = None
     ) -> None | str:
         """
         Primary orchestration function for the AI assistant system.
-        
+
         System Initialization:
         - Sets up language model client with provided configuration
         - Initializes and registers all required agents
         - Establishes intervention handlers
         - Configures runtime environment
-        
+
         State Management:
         - Loads existing conversation state if available
         - Manages persistence of system state
         - Handles conversation context
-        
+
         Flow Control:
         - Processes user inputs
         - Manages conversation lifecycle
         - Handles termination conditions
-        
+
         Args:
             model_config (Dict[str, Any]): Configuration parameters for the language model
                 including model type, parameters, and runtime settings
             latest_user_input (Optional[str]): Most recent user input to process,
                 or None for initial conversation start
-            
+
         Returns:
             Optional[str]: Required user input prompt if interaction needed,
                 None if conversation complete or terminated
         """
         logger.info("[workflow] Starting workflow function")
         logger.debug(f"[workflow] Latest user input: {latest_user_input}")
-        
+
         eval_engine_config = load_eval_engine_config("config/eval_engine_config.json")
 
         with open(config_file) as f:
@@ -78,7 +72,7 @@ class WorkflowManager:
             logger.debug(f"[workflow] Model config: {model_config}")
         model_client = ChatCompletionClient.load_component(model_config)
         logger.debug("[workflow] Initialized model client")
-        
+
         initial_schedule_assistant_message = AssistantTextMessage(
             content="Hi! How can I help you?", source="User"
         )
@@ -91,11 +85,9 @@ class WorkflowManager:
         logger.debug("[workflow] Runtime initialized with handlers")
 
         await SlowUserProxyAgent.register(
-            runtime, 
-            "User", 
-            lambda: SlowUserProxyAgent("User", "I am a user")
+            runtime, "User", lambda: SlowUserProxyAgent("User", "I am a user")
         )
-        
+
         await OrchestratorAgent.register(
             runtime,
             "Orchestrator",
@@ -111,17 +103,16 @@ class WorkflowManager:
         runtime_initiation_message: UserTextMessage | AssistantTextMessage
         if latest_user_input is not None:
             runtime_initiation_message = UserTextMessage(
-                content=latest_user_input, 
-                source="User"
+                content=latest_user_input, source="User"
             )
         else:
             runtime_initiation_message = initial_schedule_assistant_message
-        
+
         state = self.state_persister.load_content()
 
         if state:
             await runtime.load_state(state)
-            
+
         await runtime.publish_message(
             runtime_initiation_message,
             DefaultTopicId("assistant_conversation"),
@@ -129,7 +120,8 @@ class WorkflowManager:
 
         runtime.start()
         await runtime.stop_when(
-            lambda: termination_handler.is_terminated or needs_user_input_handler.needs_user_input
+            lambda: termination_handler.is_terminated
+            or needs_user_input_handler.needs_user_input
         )
 
         user_input_needed = None
@@ -141,4 +133,4 @@ class WorkflowManager:
         state_to_persist = await runtime.save_state()
         self.state_persister.save_content(state_to_persist)
 
-        return user_input_needed 
+        return user_input_needed

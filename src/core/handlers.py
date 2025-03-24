@@ -1,29 +1,45 @@
-from typing import Any
-from autogen_core import DefaultInterventionHandler, MessageContext
-from src.core.messages import (
-    GetSlowUserMessage,
-    TerminateMessage
-)
+"""
+Core message handling module for managing user interactions and interventions.
 
+This module provides handlers for managing user input requirements, message
+interception, and conversation flow control. It implements intervention handlers
+that track and manage user input state during conversations.
+
+Key Components:
+- User input request tracking
+- Message interception and routing
+- Input state management
+- Intervention handling
+
+The handlers in this module are designed to be registered with the agent runtime
+to provide seamless user interaction capabilities.
+"""
+
+from typing import Any
+
+from autogen_core import DefaultInterventionHandler, MessageContext
+
+from src.core.messages import GetSlowUserMessage, TerminateMessage
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
+
 class NeedsUserInputHandler(DefaultInterventionHandler):
     """
     Intervention handler for managing user input requirements during conversation flow.
-    
+
     Key Features:
     - Tracks pending questions awaiting user response
     - Maintains user input state
     - Provides status checks for input requirements
     - Manages input request messages
-    
+
     Usage:
         This handler should be registered with the agent runtime to intercept
         and manage messages requiring user interaction.
     """
-    
+
     def __init__(self):
         logger.debug("[NeedsUserInputHandler.init] Initializing handler")
         self.question_for_user: GetSlowUserMessage | None = None
@@ -31,17 +47,21 @@ class NeedsUserInputHandler(DefaultInterventionHandler):
     async def on_publish(self, message: Any, *, message_context: MessageContext) -> Any:
         """
         Intercepts published messages to track user input requests.
-        
+
         Args:
             message: The message being published
             message_context: Context information for the message
-            
+
         Returns:
             The original message unchanged
         """
-        logger.debug(f"[NeedsUserInputHandler.on_publish] Processing message: {type(message)}")
+        logger.debug(
+            f"[NeedsUserInputHandler.on_publish] Processing message: {type(message)}"
+        )
         if isinstance(message, GetSlowUserMessage):
-            logger.info("[NeedsUserInputHandler.on_publish] Received user input request")
+            logger.info(
+                "[NeedsUserInputHandler.on_publish] Received user input request"
+            )
             self.question_for_user = message
         return message
 
@@ -59,17 +79,17 @@ class NeedsUserInputHandler(DefaultInterventionHandler):
 class TerminationHandler(DefaultInterventionHandler):
     """
     Intervention handler for managing system termination requests and shutdown processes.
-    
+
     Key Responsibilities:
     - Tracks termination messages and reasons
     - Manages graceful shutdown sequences
     - Maintains termination state
     - Provides status checks for termination conditions
-    
+
     Note: This handler ensures proper cleanup and state persistence
     before system shutdown.
     """
-    
+
     def __init__(self):
         logger.debug("[TerminationHandler.init] Initializing handler")
         self.terminateMessage: TerminateMessage | None = None
@@ -77,15 +97,17 @@ class TerminationHandler(DefaultInterventionHandler):
     async def on_publish(self, message: Any, *, message_context: MessageContext) -> Any:
         """
         Intercepts published messages to track termination requests.
-        
+
         Args:
             message: The message being published
             message_context: Context information for the message
-            
+
         Returns:
             The original message unchanged
         """
-        logger.debug(f"[TerminationHandler.on_publish] Processing message: {type(message)}")
+        logger.debug(
+            f"[TerminationHandler.on_publish] Processing message: {type(message)}"
+        )
         if isinstance(message, TerminateMessage):
             logger.info("[TerminationHandler.on_publish] Received termination request")
             self.terminateMessage = message

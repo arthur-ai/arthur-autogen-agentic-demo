@@ -1,3 +1,10 @@
+"""
+Test suite for the tools module.
+
+This module contains test cases for the tools implemented in the `src.tools` module.
+The tests cover various functionalities including stock forecasting, sentiment analysis,
+
+"""
 import pytest
 import pandas as pd
 import numpy as np

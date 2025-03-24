@@ -7,9 +7,9 @@ from src.core.messages import AssistantTextMessage, UserTextMessage
 from src.core.persistence import MockPersistence
 
 __all__ = [
-    'NeedsUserInputHandler',
-    'TerminationHandler',
-    'AssistantTextMessage',
-    'UserTextMessage',
-    'MockPersistence'
-] 
+    "NeedsUserInputHandler",
+    "TerminationHandler",
+    "AssistantTextMessage",
+    "UserTextMessage",
+    "MockPersistence",
+]
