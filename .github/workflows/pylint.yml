@@ -1,13 +1,13 @@
 name: Lint and Auto-Fix Python Code (Excludes tests)
 
 on:
-  pull_request:
-    paths:
-      - '**.py'
   push:
     paths:
       - '**.py'
-  workflow_dispatch:
+  pull_request:
+    paths:
+      - '**.py'
+  workflow_dispatch:  # Manual trigger from Actions tab
 
 jobs:
   lint-and-fix:
@@ -29,21 +29,27 @@ jobs:
           python -m pip install --upgrade pip
           pip install black isort ruff pylint
 
-      - name: Run formatters (black, isort, ruff)
+      - name: Run black (code formatter)
         run: |
           black . --verbose --exclude '^test/'
-          isort . --profile black --skip test
-          ruff . --fix --exclude test
 
-      - name: Run pylint (excluding test directory)
+      - name: Run isort (import sorter)
         run: |
-          pylint $(git ls-files '*.py' | grep -v '^tests/')
+          isort . --profile black --skip test
+
+      - name: Run ruff (linter + autofix)
+        run: |
+          ruff check . --fix --exclude test
+
+      - name: Run pylint (static analysis)
+        run: |
+          pylint $(git ls-files '*.py' | grep -v '^test/')
 
       - name: Commit and push fixes
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add .
-          git diff --cached --quiet || git commit -m "chore: auto-fix lint issues"
+          git diff --cached --quiet || git commit -m "chore: auto-fix lint issues 🤖"
           git push
