@@ -1,0 +1,19 @@
+# .github/workflows/validate-commits.yml
+name: Validate Commits
+
+on:
+  pull_request:
+    branches: [dev]
+
+jobs:
+  check-commits:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Check commit messages
+        run: |
+          COMMITS=$(git log origin/${{ github.base_ref }}..HEAD --pretty=format:"%s")
+          echo "$COMMITS" | grep -E -q '^(feat|fix|docs|style|refactor|test|chore|perf)(\(.+\))?: .+'
