@@ -1,8 +1,13 @@
 import logging
 from typing import Any, Mapping
 
-from autogen_core import (DefaultTopicId, MessageContext, RoutedAgent,
-                          message_handler, type_subscription)
+from autogen_core import (
+    DefaultTopicId,
+    MessageContext,
+    RoutedAgent,
+    message_handler,
+    type_subscription,
+)
 from autogen_core.model_context import BufferedChatCompletionContext
 from autogen_core.models import AssistantMessage
 

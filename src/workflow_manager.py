@@ -20,8 +20,13 @@ from autogen_core.models import ChatCompletionClient
 
 from .agents import OrchestratorAgent, SlowUserProxyAgent
 from .arthur_eval_engine import load_eval_engine_config
-from .core import (AssistantTextMessage, MockPersistence,
-                   NeedsUserInputHandler, TerminationHandler, UserTextMessage)
+from .core import (
+    AssistantTextMessage,
+    MockPersistence,
+    NeedsUserInputHandler,
+    TerminationHandler,
+    UserTextMessage,
+)
 
 logger = logging.getLogger(__name__)
 

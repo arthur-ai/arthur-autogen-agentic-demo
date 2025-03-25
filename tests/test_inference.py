@@ -1,6 +1,7 @@
 import pytest
 from src.inference.inference import InferenceResult, RuleResult
 
+
 @pytest.fixture
 def sample_inference_json():
     return {
@@ -14,7 +15,7 @@ def sample_inference_json():
                 "scope": "global",
                 "result": "Pass",
                 "latency_ms": 100,
-                "details": {"score": 0.95}
+                "details": {"score": 0.95},
             },
             {
                 "id": "rule2",
@@ -23,10 +24,11 @@ def sample_inference_json():
                 "scope": "input",
                 "result": "Fail",
                 "latency_ms": 50,
-                "details": {"error": "Invalid format"}
-            }
-        ]
+                "details": {"error": "Invalid format"},
+            },
+        ],
     }
+
 
 def test_inference_result_initialization(sample_inference_json):
     result = InferenceResult(sample_inference_json)
@@ -34,11 +36,13 @@ def test_inference_result_initialization(sample_inference_json):
     assert result.user_id == "user-456"
     assert len(result.rule_results) == 2
 
+
 def test_inference_result_to_dict(sample_inference_json):
     result = InferenceResult(sample_inference_json)
     dict_result = result.to_dict()
     assert dict_result["inference_id"] == "test-123"
     assert len(dict_result["rule_results"]) == 2
+
 
 def test_get_pass_fail_results(sample_inference_json):
     result = InferenceResult(sample_inference_json)
@@ -47,8 +51,9 @@ def test_get_pass_fail_results(sample_inference_json):
     assert pass_fail[0]["result"] is True  # Pass
     assert pass_fail[1]["result"] is False  # Fail
 
+
 def test_get_pass_fail_string(sample_inference_json):
     result = InferenceResult(sample_inference_json)
     pass_fail_str = result.get_pass_fail_string()
     assert "Content Safety: PASS" in pass_fail_str
-    assert "Input Validation: FAIL" in pass_fail_str 
+    assert "Input Validation: FAIL" in pass_fail_str
