@@ -8,18 +8,15 @@ The tests cover various functionalities including stock forecasting, sentiment a
 
 from unittest.mock import MagicMock, patch
 
-import numpy as np
 import pandas as pd
 import pytest
 
 from src.tools.tools import (
     FinancialLiteracyInput,
-    FinancialLiteracyOutput,
     FinancialLiteracyTool,
     OptionsPricingInput,
     OptionsPricingTool,
     SentimentAnalysisInput,
-    SentimentAnalysisOutput,
     SentimentAnalysisTool,
     StockForecastTool,
     StockPredictorInput,

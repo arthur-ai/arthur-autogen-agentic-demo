@@ -1,6 +1,6 @@
 import pytest
 
-from src.inference.inference import InferenceResult, RuleResult
+from src.inference.inference import InferenceResult
 
 
 @pytest.fixture
