@@ -1,6 +1,6 @@
 <div>
    <div align="center">
-   <img src="https://cdn.prod.website-files.com/6230fe4706acf355d38b2d54/65b98b3564bb58c88c0a1b66_arthur-logo-light-nav.svg" alt="Arthur AI Logo" width="300"/>
+   <img src="https://cdn.prod.website-files.com/6230fe4706acf355d38b2d54/65b98b3564bb58c88c0a1b66_arthur-logo-light-nav.svg" alt="Arthur AI Logo" width="300" style="background-color: white;"/>
    </div>
 </div>
 

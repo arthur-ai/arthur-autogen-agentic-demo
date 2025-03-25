@@ -9,7 +9,19 @@ This repository follows modern Python tooling and automation using:
 - ✅ `pytest` for testing  
 - ✅ GitHub Actions for CI  
 
+📚 For full setup instructions and usage, see [README.md](./README.md)
+
 Please read this guide before submitting a pull request or commit.
+
+---
+
+## 🛠 How to Contribute
+
+1. Fork the repository
+2. Clone your fork and create a new feature branch
+3. Follow commit conventions (see below)
+4. Write or update tests for any code changes
+5. Push and open a Pull Request against `dev`
 
 ---
 
@@ -79,6 +91,11 @@ Run all tests locally using:
 pytest
 ```
 
+Tests live in the `tests/` folder and follow `pytest` conventions:
+- Test files: `test_*.py`
+- Test functions: `test_*()`
+- Use `pytest-asyncio` for async tests
+
 ---
 
 ## 🩰 Dev Setup (Recommended)
@@ -87,6 +104,19 @@ Install dev dependencies:
 
 ```bash
 pip install -r requirements-dev.txt
+```
+
+Create and activate a virtual environment (optional but recommended):
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # or .venv\Scripts\activate on Windows
+```
+
+Then initialize with:
+
+```bash
+./setup-dev.sh
 ```
 
 ---
@@ -127,10 +157,10 @@ repos:
   - repo: local
     hooks:
       - id: commit-msg-format
-        name: Check commit message format
-        entry: ./scripts/check-commit-msg.sh
-        language: system
-        stages: [commit-msg]
+      name: Check commit message format
+      entry: ./scripts/check-commit-msg.sh
+      language: system
+      stages: [commit-msg]
 ```
 
 ### 4. Install the hook
@@ -143,4 +173,3 @@ Now all commit messages will be validated automatically before committing.
 ---
 
 ## ✅ Thanks for contributing! 🙌
-

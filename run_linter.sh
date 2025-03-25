@@ -1,7 +1,19 @@
 #!/bin/bash
 
-set -e  # stop on error (except where we handle it manually)
-export PYTHONPATH="/Users/ibrahim/Documents/Project/arthur-autogen-agentic-demo"
+set -e  # Stop on first error (except where handled manually)
+
+# Load .env file if it exists
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs)
+fi
+
+# Ensure PROJECT_PATH is set
+if [ -z "$PROJECT_PATH" ]; then
+  echo "❌ PROJECT_PATH is not set in your .env file."
+  exit 1
+fi
+
+export PYTHONPATH="$PROJECT_PATH"
 
 echo "🔧 Ensuring formatters & linters are installed..."
 python -m pip install --upgrade pip
