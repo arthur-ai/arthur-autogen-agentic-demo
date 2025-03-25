@@ -24,39 +24,23 @@ import uuid
 from collections.abc import Mapping
 from typing import Any
 
-from autogen_core import (
-    DefaultTopicId,
-    FunctionCall,
-    MessageContext,
-    RoutedAgent,
-    message_handler,
-    type_subscription,
-)
+from autogen_core import (DefaultTopicId, FunctionCall, MessageContext,
+                          RoutedAgent, message_handler, type_subscription)
 from autogen_core.model_context import BufferedChatCompletionContext
-from autogen_core.models import (
-    AssistantMessage,
-    ChatCompletionClient,
-    LLMMessage,
-    SystemMessage,
-    UserMessage,
-)
+from autogen_core.models import (AssistantMessage, ChatCompletionClient,
+                                 LLMMessage, SystemMessage, UserMessage)
 from autogen_core.tools import BaseTool
 
-from src.agents.prompts import ORCHESTRATOR_SYSTEM_MESSAGE, format_resolution_text
-from src.arthur_engine.helpers import (
-    get_arthur_engine_model,
-    send_prompt_to_arthur_engine,
-    send_response_to_arthur_engine,
-)
+from src.agents.prompts import (ORCHESTRATOR_SYSTEM_MESSAGE,
+                                format_resolution_text)
+from src.arthur_engine.helpers import (get_arthur_engine_model,
+                                       send_prompt_to_arthur_engine,
+                                       send_response_to_arthur_engine)
 from src.core.messages import AssistantTextMessage, UserTextMessage
 from src.inference.inference import InferenceResult
-from src.tools.tools import (
-    FinancialLiteracyTool,
-    OptionsPricingTool,
-    PortfolioOptimizationTool,
-    SentimentAnalysisTool,
-    StockInfoTool,
-)
+from src.tools.tools import (FinancialLiteracyTool, OptionsPricingTool,
+                             PortfolioOptimizationTool, SentimentAnalysisTool,
+                             StockInfoTool)
 from src.utils.logger import get_logger
 
 logger = get_logger("src.core")

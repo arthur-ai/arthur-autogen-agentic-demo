@@ -11,45 +11,50 @@ line-length = 88
 target-version = ["py311"]
 exclude = '''
 /(
-    \.git
-  | \.venv
+    \.venv
   | \.conda
+  | \.git
+  | __pycache__
   | build
   | dist
-  | migrations
-  | __pycache__
+  | \.mypy_cache
 )/
 '''
 
 [tool.ruff]
 line-length = 88
 target-version = "py311"
-exclude = [".conda", ".venv", "migrations", "__pycache__"]
-lint.select = [
-  "E",   # pycodestyle errors (PEP 8)
-  "W",   # pycodestyle warnings
-  "F",   # pyflakes
-  "C90", # mccabe (complexity)
-  "I",   # isort (import order)
-  "B",   # bugbear (common mistakes)
-  "UP"   # pyupgrade
-]
-lint.ignore = ["E501"]  # Let Black handle line length
+exclude = ["tests", ".conda"]
+fix = true
 
-[tool.pylint]
-disable = ["R0903"]  # Too few public methods (realistic exception)
+# Match Black formatting
+extend-select = ["I", "E", "F", "W", "UP"]
+# "I" = isort compatibility
+# "E", "W" = pycodestyle
+# "F" = pyflakes
+# "UP" = modern Python style updates
+
+[tool.ruff.isort]
+combine-as-imports = true
+known-first-party = ["src"]
+lines-after-imports = 2
+force-sort-within-sections = true
+
+[tool.pylint.master]
+ignore = ["tests", ".venv", ".conda"]
+extension-pkg-whitelist = ["pydantic"]
+
+[tool.pylint.messages_control]
+disable = [
+    "missing-docstring",
+    "invalid-name",
+    "too-few-public-methods",
+    "line-too-long",  # Let black handle this
+    "trailing-whitespace",
+]
+
+[tool.pylint.format]
 max-line-length = 88
-max-args = 5
-max-locals = 15
-max-branches = 12
-max-statements = 50
-max-nested-blocks = 5
-max-module-lines = 1000
-good-names = ["i", "j", "k", "ex", "Run", "_"]
-bad-names = ["foo", "bar", "baz", "tmp"]
-ignore = [".conda", ".venv", "migrations", "__pycache__"]
-recursive = true
-py-version = "3.11"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
