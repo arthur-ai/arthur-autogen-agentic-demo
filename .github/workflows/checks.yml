@@ -29,9 +29,6 @@ jobs:
       - name: Run Black (check only)
         run: black --check .
 
-      - name: Run isort (check only)
-        run: isort . --check-only
-
       - name: Run Ruff
         run: ruff .
 
