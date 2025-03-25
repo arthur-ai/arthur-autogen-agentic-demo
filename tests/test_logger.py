@@ -1,7 +1,9 @@
-import pytest
 import logging
 import os
-from src.utils.logger import setup_logging, get_logger
+
+import pytest
+
+from src.utils.logger import get_logger, setup_logging
 
 
 def test_get_logger():
