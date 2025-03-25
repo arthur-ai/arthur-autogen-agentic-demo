@@ -1,0 +1,62 @@
+name: Lint and Test
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - develop
+      - 'release/*'
+
+jobs:
+  lint:
+    name: Code Quality Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.11'
+
+      - name: Install tools
+        run: |
+          pip install black isort ruff pylint
+
+      - name: Run Black (check only)
+        run: black --check .
+
+      - name: Run isort (check only)
+        run: isort . --check-only
+
+      - name: Run Ruff
+        run: ruff .
+
+      - name: Run Pylint
+        run: |
+          # Adjust the path if needed (e.g., src/ or your_package/)
+          pylint $(find . -name "*.py" -not -path "./venv/*")
+
+  test:
+    name: Run Pytest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pytest
+          pip install -r requirements.txt
+
+      - name: Run Tests
+        run: pytest
