@@ -21,7 +21,8 @@ The system uses a modular architecture with:
 
 import json
 import uuid
-from typing import Any, Mapping
+from collections.abc import Mapping
+from typing import Any
 
 from autogen_core import (
     DefaultTopicId,
@@ -46,10 +47,10 @@ from src.agents.prompts import (
     VALIDATOR_SYSTEM_MESSAGE,
     format_resolution_text,
 )
-from src.arthur_eval_engine.helpers import (
-    get_shield_task,
-    send_prompt_to_shield,
-    send_response_to_shield,
+from src.arthur_engine.helpers import (
+    get_arthur_engine_model,
+    send_prompt_to_arthur_engine,
+    send_response_to_arthur_engine,
 )
 from src.core.messages import AssistantTextMessage, UserTextMessage
 from src.inference.inference import InferenceResult
@@ -143,8 +144,12 @@ class OrchestratorAssistantAgent(RoutedAgent):
             SystemMessage(content=VALIDATOR_SYSTEM_MESSAGE)
         ]
         self._config = shield_config
-        self._orchestrator_task = self.get_shield_task("agents", "OrchestratorAgent")
-        self._validator_task = self.get_shield_task("agents", "ValidatorAgent")
+        self._orchestrator_task = get_arthur_engine_model(
+            "agents", "OrchestratorAgent", self._config
+        )
+        self._validator_task = get_arthur_engine_model(
+            "agents", "ValidatorAgent", self._config
+        )
         logger.debug(
             "[OrchestratorAssistantAgent.init] OrchestratorAssistantAgent initialized with system messages"
         )
@@ -206,10 +211,10 @@ class OrchestratorAssistantAgent(RoutedAgent):
         )
 
         # Final shield validation of formatted response
-        shield_response = await send_prompt_to_shield(
+        arthur_engine_response = await send_prompt_to_arthur_engine(
             message.content, self._orchestrator_task, conversation_id
         )
-        inference_result = InferenceResult(shield_response)
+        inference_result = InferenceResult(arthur_engine_response)
         logger.debug(
             f"[SoloOrchestratorAssistantAgent] Shield validation response: {inference_result.get_rule_details()}"
         )
@@ -230,13 +235,13 @@ class OrchestratorAssistantAgent(RoutedAgent):
             [resolution_message]
         )
         context = await self._model_context.get_messages()
-        shield_message = await send_response_to_shield(
+        arthur_engine_message = await send_response_to_arthur_engine(
             final_resolution_response.content,
             self._orchestrator_task,
             inference_result.get_inference_id(),
             context,
         )
-        inference_result = InferenceResult(shield_message)
+        inference_result = InferenceResult(arthur_engine_message)
         logger.debug(
             f"[SoloOrchestratorAssistantAgent] Shield validation response: {inference_result.get_rule_details()}"
         )
@@ -392,7 +397,7 @@ class OrchestratorAssistantAgent(RoutedAgent):
         if not is_valid and loop_count < 3:
             correction_message = SystemMessage(
                 content=f"""
-                    The initial query was: {context[1]}                    
+                    The initial query was: {context[1]}
                     the answer was: {final_response}
                     This answer was not valid, the error is: {validation_response}
                     Shield validation results are: {tool_validation}
@@ -455,7 +460,7 @@ class OrchestratorAssistantAgent(RoutedAgent):
             )
 
             # Get shield task from configuration
-            validation_task = get_shield_task(
+            validation_task = get_arthur_engine_model(
                 "tools", tool_response["name"], self._config
             )
 
@@ -463,19 +468,19 @@ class OrchestratorAssistantAgent(RoutedAgent):
             logger.debug(
                 f"[ToolValidation] Processing tool response: {tool_response['response'][:100]}..."
             )
-            shield_response = await send_prompt_to_shield(
+            arthur_engine_response = await send_prompt_to_arthur_engine(
                 message, validation_task, conversation_id
             )
-            inference_result = InferenceResult(shield_response)
-            shield_response = await send_response_to_shield(
+            inference_result = InferenceResult(arthur_engine_response)
+            arthur_engine_response = await send_response_to_arthur_engine(
                 tool_response["response"],
                 validation_task,
                 inference_result.get_inference_id(),
                 context,
             )
 
-            if shield_response is not None:
-                inference_result = InferenceResult(shield_response)
+            if arthur_engine_response is not None:
+                inference_result = InferenceResult(arthur_engine_response)
                 logger.debug(
                     f"[ToolValidation] Shield validation response: {inference_result.get_rule_details()}"
                 )
@@ -600,10 +605,10 @@ class OrchestratorAssistantAgent(RoutedAgent):
         logger.debug(
             f"[OrchestratorAssistantAgent.LLM_validation] Checking text: {check_text}"
         )
-        shield_response = await send_prompt_to_shield(
+        arthur_engine_response = await send_prompt_to_arthur_engine(
             check_text, shield_task, conversation_id
         )
-        inference_id = shield_response["inference_id"]
+        inference_id = arthur_engine_response["inference_id"]
 
         checking_message = SystemMessage(content=check_text)
         await self._validator_context.add_message(checking_message)
@@ -612,14 +617,16 @@ class OrchestratorAssistantAgent(RoutedAgent):
             + (await self._validator_context.get_messages()),
             tools=[],
         )
-        shield_message = await send_response_to_shield(
+        arthur_engine_message = await send_response_to_arthur_engine(
             validation_response.content, shield_task, inference_id, context
         )
 
         logger.debug(
             f"[OrchestratorAssistantAgent] Response validation: {validation_response.content}"
         )
-        logger.debug(f"[OrchestratorAssistantAgent] Shield message: {shield_message}")
+        logger.debug(
+            f"[OrchestratorAssistantAgent] Shield message: {arthur_engine_message}"
+        )
 
         return ["Yes" in validation_response.content, validation_response.content]
 
@@ -669,4 +676,4 @@ class OrchestratorAssistantAgent(RoutedAgent):
             logger.error(
                 f"[get_shield_task] Entity {entity_name} not found in {entity_type}"
             )
-            raise KeyError(f"No shield task found for {entity_type}.{entity_name}")
+        raise KeyError(f"No shield task found for {entity_type}.{entity_name}")

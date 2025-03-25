@@ -14,7 +14,8 @@ Note: The current implementation is for development only. Production deployments
 should use a proper database solution.
 """
 
-from typing import Any, Mapping
+from collections.abc import Mapping
+from typing import Any
 
 from src.utils.logger import get_logger
 

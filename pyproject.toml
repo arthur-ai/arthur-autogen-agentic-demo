@@ -1,0 +1,62 @@
+[tool.semantic_release]
+version_variable = "src/arthur_engine/__init__.py:__version__"
+version_source = "tag"
+branch = "dev"
+upload_to_pypi = false
+commit_parser = "angular"
+changelog_file = "CHANGELOG.md"
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | \.conda
+  | build
+  | dist
+  | migrations
+  | __pycache__
+)/
+'''
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+exclude = [".conda", ".venv", "migrations", "__pycache__"]
+lint.select = [
+  "E",   # pycodestyle errors (PEP 8)
+  "W",   # pycodestyle warnings
+  "F",   # pyflakes
+  "C90", # mccabe (complexity)
+  "I",   # isort (import order)
+  "B",   # bugbear (common mistakes)
+  "UP"   # pyupgrade
+]
+lint.ignore = ["E501"]  # Let Black handle line length
+
+[tool.pylint]
+disable = ["R0903"]  # Too few public methods (realistic exception)
+max-line-length = 88
+max-args = 5
+max-locals = 15
+max-branches = 12
+max-statements = 50
+max-nested-blocks = 5
+max-module-lines = 1000
+good-names = ["i", "j", "k", "ex", "Run", "_"]
+bad-names = ["foo", "bar", "baz", "tmp"]
+ignore = [".conda", ".venv", "migrations", "__pycache__"]
+recursive = true
+py-version = "3.11"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+testpaths = ["tests"]
+markers = [
+    "asyncio: mark test as async"
+]

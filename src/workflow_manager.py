@@ -13,7 +13,7 @@ Key responsibilities:
 
 import json
 import logging
-from typing import Any, Dict, Optional
+from typing import Any
 
 from autogen_core import DefaultTopicId, SingleThreadedAgentRuntime
 from autogen_core.models import ChatCompletionClient
@@ -36,7 +36,7 @@ class WorkflowManager:
         self.state_persister = MockPersistence()
 
     async def trigger_agentic_workflow(
-        self, config_file: Dict[str, Any], latest_user_input: Optional[str] = None
+        self, config_file: dict[str, Any], latest_user_input: str | None = None
     ) -> None | str:
         """
         Primary orchestration function for the AI assistant system.

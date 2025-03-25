@@ -7,7 +7,6 @@ portfolio optimization, options pricing, and stock screening functionalities.
 import math
 import os
 from datetime import datetime
-from typing import Dict
 
 import numpy as np
 import yfinance as yf
@@ -192,7 +191,7 @@ class FinancialLiteracyTool(BaseTool[FinancialLiteracyInput, FinancialLiteracyOu
 class PortfolioOptimizationInput(BaseModel):
     """Input model for portfolio optimization."""
 
-    portfolio: Dict[str, float] = Field(description="Portfolio with asset weights.")
+    portfolio: dict[str, float] = Field(description="Portfolio with asset weights.")
 
 
 class PortfolioOptimizationOutput(BaseModel):

@@ -6,7 +6,7 @@ Contains the core instructions and behavior definitions for each agent type.
 ORCHESTRATOR_SYSTEM_MESSAGE = """
                             I am an AI assistant, that helps you with parsing and understanding tasks into smaller tasks.
                             This system comes with eight helpful financial tools.
-                            
+
                             Available Tools:
                             1. StockInfoTool:
                                - Gets real-time and historical stock data
@@ -67,14 +67,14 @@ VALIDATOR_SYSTEM_MESSAGE = """
                             4. Formatting responses in a clear, human-readable format with proper structure
                             5. Managing system resources efficiently
                             6. Maintaining consistency in communication style and format
-                            
+
                             When processing requests, I will:
                             - Verify input data integrity
                             - Check for required parameters
                             - Ensure responses are properly formatted
                             - Apply consistent styling and formatting rules
                             - Flag any potential issues or inconsistencies
-                            
+
                             All responses will be formatted with:
                             - Proper paragraph breaks
                             - Consistent formatting

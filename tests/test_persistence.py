@@ -1,4 +1,3 @@
-
 from src.core.persistence import MockPersistence
 
 

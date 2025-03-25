@@ -21,7 +21,8 @@ The system uses a modular architecture with:
 
 import json
 import uuid
-from typing import Any, Mapping
+from collections.abc import Mapping
+from typing import Any
 
 from autogen_core import (
     DefaultTopicId,
@@ -42,10 +43,10 @@ from autogen_core.models import (
 from autogen_core.tools import BaseTool
 
 from src.agents.prompts import ORCHESTRATOR_SYSTEM_MESSAGE, format_resolution_text
-from src.arthur_eval_engine.helpers import (
-    get_eval_engine_model,
-    send_prompt_to_eval_engine,
-    send_response_to_eval_engine,
+from src.arthur_engine.helpers import (
+    get_arthur_engine_model,
+    send_prompt_to_arthur_engine,
+    send_response_to_arthur_engine,
 )
 from src.core.messages import AssistantTextMessage, UserTextMessage
 from src.inference.inference import InferenceResult
@@ -92,7 +93,7 @@ class SoloOrchestratorAssistantAgent(RoutedAgent):
         description: str,
         model_client: ChatCompletionClient,
         initial_message: AssistantTextMessage | None = None,
-        eval_engine_config: dict = None,
+        arthur_engine_config: dict = None,
     ) -> None:
         """
         Initialize the orchestrator agent.
@@ -122,8 +123,8 @@ class SoloOrchestratorAssistantAgent(RoutedAgent):
         self._name = name
         self._model_client = model_client
         self._system_message = [SystemMessage(content=ORCHESTRATOR_SYSTEM_MESSAGE)]
-        self._config = eval_engine_config
-        self._orchestrator_task = get_eval_engine_model(
+        self._config = arthur_engine_config
+        self._orchestrator_task = get_arthur_engine_model(
             "agents", "OrchestratorAgent", self._config
         )
         logger.debug(
@@ -184,10 +185,10 @@ class SoloOrchestratorAssistantAgent(RoutedAgent):
         )
 
         # Final Arthur Evaluation Engine validation of formatted response
-        eval_engine_response = await send_prompt_to_eval_engine(
+        arthur_engine_response = await send_prompt_to_arthur_engine(
             message.content, self._orchestrator_task, conversation_id
         )
-        inference_result = InferenceResult(eval_engine_response)
+        inference_result = InferenceResult(arthur_engine_response)
         logger.debug(
             f"[SoloOrchestratorAssistantAgent] Arthur Evaluation Engine validation response: {inference_result.get_rule_details()}"
         )
@@ -208,13 +209,13 @@ class SoloOrchestratorAssistantAgent(RoutedAgent):
             [resolution_message]
         )
         context = await self._model_context.get_messages()
-        eval_engine_message = await send_response_to_eval_engine(
+        arthur_engine_message = await send_response_to_arthur_engine(
             final_resolution_response.content,
             self._orchestrator_task,
             inference_result.get_inference_id(),
             context,
         )
-        inference_result = InferenceResult(eval_engine_message)
+        inference_result = InferenceResult(arthur_engine_message)
         logger.debug(
             f"[SoloOrchestratorAssistantAgent] Arthur Evaluation Engine validation response: {inference_result.get_rule_details()}"
         )
@@ -417,7 +418,7 @@ class SoloOrchestratorAssistantAgent(RoutedAgent):
             )
 
             # Get Arthur Evaluation Engine task from configuration
-            validation_task = get_eval_engine_model(
+            validation_task = get_arthur_engine_model(
                 "tools", tool_response["name"], self._config
             )
 
@@ -425,19 +426,19 @@ class SoloOrchestratorAssistantAgent(RoutedAgent):
             logger.debug(
                 f"[ToolValidation] Processing tool response: {tool_response['response'][:100]}..."
             )
-            eval_engine_response = await send_prompt_to_eval_engine(
+            arthur_engine_response = await send_prompt_to_arthur_engine(
                 message, validation_task, conversation_id
             )
-            inference_result = InferenceResult(eval_engine_response)
-            eval_engine_response = await send_response_to_eval_engine(
+            inference_result = InferenceResult(arthur_engine_response)
+            arthur_engine_response = await send_response_to_arthur_engine(
                 tool_response["response"],
                 validation_task,
                 inference_result.get_inference_id(),
                 context,
             )
 
-            if eval_engine_response is not None:
-                inference_result = InferenceResult(eval_engine_response)
+            if arthur_engine_response is not None:
+                inference_result = InferenceResult(arthur_engine_response)
                 logger.debug(
                     f"[ToolValidation] Arthur Evaluation Engine validation response: {inference_result.get_rule_details()}"
                 )

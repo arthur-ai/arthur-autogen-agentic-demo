@@ -40,7 +40,7 @@ def setup_logging(
     timestamp = datetime.now().strftime("%Y%m%d")
 
     if os.path.exists(path):
-        with open(path, "rt") as f:
+        with open(path) as f:
             try:
                 config = yaml.safe_load(f.read())
                 # Dynamically update log filenames with timestamp

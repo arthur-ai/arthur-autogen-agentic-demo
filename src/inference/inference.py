@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from src.utils.logger import get_logger
 
@@ -27,7 +27,7 @@ class RuleResult:
         scope: str,
         result: str,
         latency_ms: int,
-        details: Optional[Dict[str, Any]] = None,
+        details: dict[str, Any] | None = None,
     ):
         """
         Initialize a RuleResult instance.
@@ -59,7 +59,7 @@ class RuleResult:
         """
         return self.result.lower() == "pass"
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """
         Convert the RuleResult instance to a dictionary representation.
 
@@ -78,7 +78,7 @@ class RuleResult:
 
 
 class InferenceResult:
-    def __init__(self, input_json: Dict[str, Any]):
+    def __init__(self, input_json: dict[str, Any]):
         """
         Initializes an InferenceResult object from a JSON dictionary.
 
@@ -99,7 +99,7 @@ class InferenceResult:
             for rule in input_json["rule_results"]
         ]
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """
         Converts the InferenceResult object to a dictionary.
 
@@ -111,7 +111,7 @@ class InferenceResult:
             "rule_results": [rule.to_dict() for rule in self.rule_results],
         }
 
-    def get_pass_fail_results(self) -> List[Dict[str, Any]]:
+    def get_pass_fail_results(self) -> list[dict[str, Any]]:
         """
         Returns a list of rules with their pass/fail status.
         """
@@ -134,7 +134,7 @@ class InferenceResult:
             for rule in self.rule_results
         )
 
-    def get_rule_details(self) -> List[Dict[str, Any]]:
+    def get_rule_details(self) -> list[dict[str, Any]]:
         """
         Returns a list of all rules with their details.
         """
