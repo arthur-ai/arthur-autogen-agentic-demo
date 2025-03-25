@@ -19,7 +19,7 @@ from autogen_core import DefaultTopicId, SingleThreadedAgentRuntime
 from autogen_core.models import ChatCompletionClient
 
 from .agents import OrchestratorAgent, SlowUserProxyAgent
-from .arthur_eval_engine import load_eval_engine_config
+from .arthur_engine import load_arthur_engine_config
 from .core import (
     AssistantTextMessage,
     MockPersistence,
@@ -70,7 +70,7 @@ class WorkflowManager:
         logger.info("[workflow] Starting workflow function")
         logger.debug(f"[workflow] Latest user input: {latest_user_input}")
 
-        eval_engine_config = load_eval_engine_config("config/eval_engine_config.json")
+        arthur_engine_config = load_arthur_engine_config("config/arthur_engine_config.json")
 
         with open(config_file) as f:
             model_config = json.load(f)
@@ -101,7 +101,7 @@ class WorkflowManager:
                 description="AI that helps you parse tasks",
                 model_client=model_client,
                 initial_message=initial_schedule_assistant_message,
-                eval_engine_config=eval_engine_config,
+                arthur_engine_config=arthur_engine_config,
             ),
         )
 
