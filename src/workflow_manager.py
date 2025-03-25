@@ -70,7 +70,9 @@ class WorkflowManager:
         logger.info("[workflow] Starting workflow function")
         logger.debug(f"[workflow] Latest user input: {latest_user_input}")
 
-        arthur_engine_config = load_arthur_engine_config("config/arthur_engine_config.json")
+        arthur_engine_config = load_arthur_engine_config(
+            "config/arthur_engine_config.json"
+        )
 
         with open(config_file) as f:
             model_config = json.load(f)

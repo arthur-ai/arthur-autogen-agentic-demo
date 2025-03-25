@@ -4,7 +4,9 @@ set -e  # Stop on first error (except where handled manually)
 
 # Load .env file if it exists
 if [ -f .env ]; then
-  export $(grep -v '^#' .env | xargs)
+  set -o allexport
+  source .env
+  set +o allexport
 fi
 
 # Ensure PROJECT_PATH is set
