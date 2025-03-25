@@ -57,7 +57,7 @@ cd your-repo
 python -m venv .venv
 source .venv/bin/activate  # or .venv\Scriptsctivate on Windows
 pip install -r requirements.txt
-python src/main.py
+python main.py
 ```
 
 ---

@@ -69,7 +69,7 @@ This file contains model-specific settings and should include:
 ```json
 [
     {
-        "provider": "azure",
+        "provider": "AzureOpenAIChatCompletionClient",
         "config": {
             "model": "gpt-4",
             "azure_endpoint": "https://<your-resource-name>.openai.azure.com",
@@ -79,7 +79,7 @@ This file contains model-specific settings and should include:
             },
     },
     {
-        "provider": "openai",
+        "provider": "OpenAIChatCompletionClient",
         "config": {
             "model": "gpt-4-1106-preview",
             "api_key": "",
