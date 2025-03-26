@@ -1,9 +1,9 @@
 [tool.semantic_release]
 version_variable = "src/arthur_engine/__init__.py:__version__"
-version_source = "tag"
+version_source = "commit"
 branch = "main"
 upload_to_pypi = false
-commit_parser = "angular"
+commit_parser = "conventional"
 changelog_file = "CHANGELOG.md"
 
 [tool.black]

@@ -2,7 +2,7 @@
 Arthur Engine integration for safety validation and quality assurance.
 """
 
-__version__ = "0.1.0"
+__version__ = "1.0.0"
 
 from src.arthur_engine.helpers import (
     get_arthur_engine_model,
