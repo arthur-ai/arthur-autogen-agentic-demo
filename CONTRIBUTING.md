@@ -8,6 +8,8 @@ This repository follows modern Python tooling and automation using:
 - ✅ Linters (`black`, `ruff`, `pylint`) for clean code  
 - ✅ `pytest` for testing  
 - ✅ GitHub Actions for CI  
+- - ✅ `pre-commit` for enforcing standards like commit messages, linting, and branch naming
+
 
 📚 For full setup instructions and usage, see [README.md](./README.md)
 

@@ -1,10 +1,8 @@
-div align="center">
-
 # The Arthur AutoGen Agentic Deployment
 
 <i>Make AI work for Everyone.</i>
 
-[![GenAI Engine CI](https://github.com/arthur-ai/arthur-autogen-agentic-demo/static/arthur-triangle-favicon.png)](https://github.com/arthur-ai/arthur-autogen-agentic-demo)
+[![Arthur](https://github.com/arthur-ai/arthur-autogen-agentic-demo/static/arthur-triangle-favicon.png)](https://github.com/arthur-ai/arthur-autogen-agentic-demo/static/arthur-triangle-favicon.png)
 [![Discord](https://img.shields.io/badge/Discord-Arthur-blue?logo=discord&logoColor=white)](https://discord.gg/tdfUAtaVHz)
 
 [Website](https://arthur.ai) - [Documentation](https://shield.docs.arthur.ai/docs) - [Talk to someone at Arthur](https://www.arthur.ai/arthur-book-a-demo)
@@ -51,7 +49,7 @@ Model parameters and routing are defined in `model_config.json`.
 
 ### 🎯 Eval Engine Configuration
 
-Evaluation tasks (if used) are configured in `eval_config.json`:
+Evaluation tasks (if used) are configured in `arthur_engine_config.json`:
 - Metrics to track (e.g., accuracy, response time)
 - Conditions for test prompts
 - Logging preferences (optional integration with Arthur's Eval Engine)
