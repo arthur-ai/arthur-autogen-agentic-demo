@@ -67,6 +67,9 @@
 - Revise README for clarity, update features, and enhance setup instructions
   ([`1bc3d2a`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/1bc3d2a8db9e768c16c2c0ebb5e95a16f6283fe5))
 
+- **changelog**: Update CHANGELOG.md
+  ([`d65d01a`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/d65d01ac49612388fc557d7ccb5255342a1364e2))
+
 ### Refactoring
 
 - Correcting naming convention
