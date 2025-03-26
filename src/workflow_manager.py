@@ -28,6 +28,7 @@ from .core import (
     UserTextMessage,
 )
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -74,7 +75,7 @@ class WorkflowManager:
             "config/arthur_engine_config.json"
         )
 
-        with open(config_file) as f:
+        with open(config_file, encoding='utf-8') as f:
             model_config = json.load(f)
             logger.debug(f"[workflow] Model config: {model_config}")
         model_client = ChatCompletionClient.load_component(model_config)

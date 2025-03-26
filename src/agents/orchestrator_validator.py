@@ -19,10 +19,10 @@ The system uses a modular architecture with:
 - Input validation and safety checks
 """
 
-import json
-import uuid
 from collections.abc import Mapping
+import json
 from typing import Any
+import uuid
 
 from autogen_core import (
     DefaultTopicId,
@@ -62,6 +62,7 @@ from src.tools.tools import (
     StockInfoTool,
 )
 from src.utils.logger import get_logger
+
 
 logger = get_logger("src.core")
 

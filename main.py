@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from src.utils import get_logger, get_user_input, setup_logging
 from src.workflow_manager import WorkflowManager
 
+
 load_dotenv()  # Load environment variables from .env file
 
 setup_logging()

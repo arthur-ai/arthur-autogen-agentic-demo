@@ -21,11 +21,12 @@ import json
 import os
 from pathlib import Path
 
-import httpx
 from autogen_core.models import LLMMessage
 from dotenv import load_dotenv
+import httpx
 
 from src.utils.logger import get_logger
+
 
 logger = get_logger(__name__)
 load_dotenv()  # Load environment variables from .env file

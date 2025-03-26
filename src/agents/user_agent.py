@@ -1,5 +1,5 @@
-import logging
 from collections.abc import Mapping
+import logging
 from typing import Any
 
 from autogen_core import (
@@ -13,6 +13,7 @@ from autogen_core.model_context import BufferedChatCompletionContext
 from autogen_core.models import AssistantMessage
 
 from src.core.messages import AssistantTextMessage, GetSlowUserMessage
+
 
 logger = logging.getLogger(__name__)
 

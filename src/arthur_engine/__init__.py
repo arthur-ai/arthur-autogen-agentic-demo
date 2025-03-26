@@ -11,6 +11,7 @@ from src.arthur_engine.helpers import (
     send_response_to_arthur_engine,
 )
 
+
 __all__ = [
     "get_arthur_engine_model",
     "send_prompt_to_arthur_engine",
