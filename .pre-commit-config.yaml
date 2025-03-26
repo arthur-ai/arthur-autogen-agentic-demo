@@ -11,4 +11,16 @@ repos:
         name: Generate CHANGELOG
         entry: ./.pre-commit/generate-changelog.sh
         language: system
-        stages: [commit]
+        stages: [pre-commit]
+
+      - id: check-branch-name
+        name: 🧠 Enforce Branch Naming Convention
+        entry: .pre-commit/check-branch-name.sh
+        language: script
+        stages: [pre-commit]
+
+      - id: lint-all-files
+        name: Lint All Python Files
+        entry: ./.pre-commit/lint-all-files.sh
+        language: script
+        stages: [manual]
