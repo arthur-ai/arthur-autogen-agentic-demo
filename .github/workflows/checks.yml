@@ -5,12 +5,13 @@ on:
   push:
     branches:
       - main
-      - develop
+      - dev
       - 'release/*'
+      - 'feature/*'
 
 jobs:
   lint:
-    name: Code Quality Check
+    name: 🧹 Code Quality Check
     runs-on: ubuntu-latest
 
     steps:
@@ -24,10 +25,10 @@ jobs:
 
       - name: Install project and lint tools
         run: |
-            pip install --upgrade pip
-            pip install -r requirements.txt
-            pip install black isort ruff pylint
-            
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install black isort ruff pylint
+
       - name: Add src to PYTHONPATH
         run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)/src" >> $GITHUB_ENV
 
@@ -39,11 +40,10 @@ jobs:
 
       - name: Run Pylint
         run: |
-          # Adjust the path if needed (e.g., src/ or your_package/)
           pylint $(find . -name "*.py" -not -path "./venv/*")
 
   test:
-    name: Run Pytest
+    name: ✅ Pytest - All Tests Must Pass
     runs-on: ubuntu-latest
 
     steps:
@@ -57,8 +57,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pytest
+          pip install --upgrade pip
           pip install -r requirements.txt
+          pip install pytest
 
-      - name: Run Tests
-        run: pytest
+      - name: Run Tests (fail on any failure)
+        run: pytest --exitfirst --strict-markers --tb=short
