@@ -49,7 +49,7 @@ Model parameters and routing are defined in `model_config.json`.
 
 ### 🎯 Eval Engine Configuration
 
-Evaluation tasks (if used) are configured in `eval_config.json`:
+Evaluation tasks (if used) are configured in `arthur_engine_config.json`:
 - Metrics to track (e.g., accuracy, response time)
 - Conditions for test prompts
 - Logging preferences (optional integration with Arthur's Eval Engine)
