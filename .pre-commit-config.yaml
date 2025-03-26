@@ -6,3 +6,9 @@ repos:
         entry: ./.pre-commit/check-commit-msg.sh
         language: system
         stages: [commit-msg]
+
+      - id: changelog-update
+        name: Generate CHANGELOG
+        entry: ./.pre-commit/generate-changelog.sh
+        language: system
+        stages: [commit]
