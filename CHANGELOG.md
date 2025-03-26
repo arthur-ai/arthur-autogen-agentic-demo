@@ -23,6 +23,10 @@
 - Refactor pull request creation in release workflow to use a JSON file for better maintainability
   ([`6dcf56e`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/6dcf56e2816b1eb441f50ef0c5bfc1e214db8602))
 
+- Update dependency installation in CI workflow to use requirements-dev.txt for development
+  dependencies
+  ([`6b910de`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/6b910de714b07233e36d82f401e174cc7e09ea30))
+
 - Update environment configuration and enhance documentation
   ([`23ee184`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/23ee184825a459195efdbe1f226fe26234ae0dc2))
 
@@ -66,6 +70,9 @@
 
 - Revise README for clarity, update features, and enhance setup instructions
   ([`1bc3d2a`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/1bc3d2a8db9e768c16c2c0ebb5e95a16f6283fe5))
+
+- **changelog**: Update CHANGELOG.md
+  ([`d65d01a`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/d65d01ac49612388fc557d7ccb5255342a1364e2))
 
 ### Refactoring
 
