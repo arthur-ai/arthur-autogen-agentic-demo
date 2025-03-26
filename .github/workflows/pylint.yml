@@ -2,18 +2,19 @@ name: Lint and Auto-Fix Python Code (Excludes tests)
 
 on:
   push:
-    branches:
-      - dev
+    branches-ignore:
+      - main
+      - develop
     paths:
       - '**.py'
 
   pull_request:
-    branches:
-      - dev
+    branches-ignore:
+      - main
+      - develop
     paths:
       - '**.py'
 
-  workflow_dispatch:  # Manual trigger from Actions tab
 
 jobs:
   lint-and-fix:
@@ -33,6 +34,7 @@ jobs:
         run: |
             pip install --upgrade pip
             pip install -r requirements.txt
+            pip install -r requirements-dev.txt
             pip install black isort ruff pylint
               
       - name: Add src to PYTHONPATH
