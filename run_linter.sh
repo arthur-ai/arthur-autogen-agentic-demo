@@ -33,8 +33,8 @@ find src -name "*.py" | while read file; do
   echo "📦 Sorting imports with isort..."
   isort "$file" || echo "⚠️ isort failed on $file"
 
-  # echo "🧹 Lint-fixing with ruff..."
-  # ruff check "$file" --fix || echo "⚠️ ruff failed on $file"
+  echo "🧹 Lint-fixing with ruff..."
+  ruff check "$file" --fix || echo "⚠️ ruff failed on $file"
 
   echo "🔍 Linting with pylint..."
   pylint "$file" || echo "⚠️ Skipping $file due to pylint crash"
