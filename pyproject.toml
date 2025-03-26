@@ -3,6 +3,7 @@ version_variable = "src/arthur_engine/__init__.py:__version__"
 version_source = "commit"
 branch = "main"
 upload_to_pypi = false
+upload_to_release = false
 commit_parser = "conventional"
 changelog_file = "CHANGELOG.md"
 
