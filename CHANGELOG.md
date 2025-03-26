@@ -5,6 +5,9 @@
 
 ### Chores
 
+- Add changelog generation and update workflow for automated changelog commits
+  ([`99b4a31`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/99b4a313422da1455e00669dce2feb11fb4803bf))
+
 - Add upload_to_release flag to pyproject.toml for release management
   ([`94a8c20`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/94a8c209837fb833b49456f790e8e6fa590aef8b))
 
@@ -14,8 +17,17 @@
 - Correcting dependancies
   ([`903dba7`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/903dba705a3ff8204c1a3f4e5bd1ab8a8af5a931))
 
+- Enhance release workflow to improve changelog update process and pull request creation
+  ([`2ddecc7`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/2ddecc7c76c78c147c58409b220338ef252abfbf))
+
+- Refactor pull request creation in release workflow to use a JSON file for better maintainability
+  ([`6dcf56e`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/6dcf56e2816b1eb441f50ef0c5bfc1e214db8602))
+
 - Update environment configuration and enhance documentation
   ([`23ee184`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/23ee184825a459195efdbe1f226fe26234ae0dc2))
+
+- Update GitHub workflows for improved linting and testing, and enhance changelog automation
+  ([`f6ecc54`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/f6ecc547961192f586fe0a2736f0b5a731afaf5f))
 
 - Update linter configuration and improve import formatting across modules
   ([`4060b4a`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/4060b4aaea607dfbb97f10faaa4f33fa18f2181d))
@@ -48,6 +60,9 @@
 
 - Added CONTRIBUTING
   ([`09a0b68`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/09a0b68bbf7db92849c97c1d9d660e918a5a1675))
+
+- Revise README for clarity and add project badges, including a new favicon
+  ([`e081488`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/e081488a5fecad4170ca3b5bb5dda902236e0d95))
 
 - Revise README for clarity, update features, and enhance setup instructions
   ([`1bc3d2a`](https://github.com/arthur-ai/arthur-autogen-agentic-demo/commit/1bc3d2a8db9e768c16c2c0ebb5e95a16f6283fe5))
