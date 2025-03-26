@@ -4,23 +4,22 @@ This module contains tools for stock data retrieval, price prediction, sentiment
 portfolio optimization, options pricing, and stock screening functionalities.
 """
 
-from datetime import datetime
 import math
 import os
+from datetime import datetime
 
+import numpy as np
+import yfinance as yf
 from alpha_vantage.fundamentaldata import FundamentalData
 from autogen_core import CancellationToken
 from autogen_core.tools import BaseTool
 from dotenv import load_dotenv
-import numpy as np
 from pydantic import BaseModel, Field
 from scipy.stats import norm
 from sklearn.linear_model import LinearRegression
-import yfinance as yf
 
 from src.tools.literacy import knowledge_base
 from src.utils.logger import get_logger
-
 
 load_dotenv()  # Load environment variables from .env file
 ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")

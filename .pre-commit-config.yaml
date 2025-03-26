@@ -18,3 +18,9 @@ repos:
         entry: .pre-commit/check-branch-name.sh
         language: script
         stages: [pre-commit]
+
+      - id: lint-all-files
+        name: Lint All Python Files
+        entry: ./.pre-commit/lint-all-files.sh
+        language: script
+        stages: [manual]
