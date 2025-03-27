@@ -2,8 +2,12 @@
 
 <i>Make AI work for Everyone.</i>
 
+<div style="text-align: center;">
+
 [![Arthur](https://github.com/arthur-ai/arthur-autogen-agentic-demo/blob/main/static/arthur-triangle-favicon.png?raw=true)](https://github.com/arthur-ai/arthur-autogen-agentic-demo/blob/main/static/arthur-triangle-favicon.png?raw=true)
+
 [![Discord](https://img.shields.io/badge/Discord-Arthur-blue?logo=discord&logoColor=white)](https://discord.gg/tdfUAtaVHz)
+</div>
 
 [Website](https://arthur.ai) - [Documentation](https://shield.docs.arthur.ai/docs) - [Talk to someone at Arthur](https://www.arthur.ai/arthur-book-a-demo)
 
