@@ -18,10 +18,11 @@ Use a `.envTemplate` file to indicate required settings:
 
 ```env
 # .env.example
-ALPHA_VANTAGE_API_KEY=your-api-key
-ENGINE_URL=https://your-arthur-instance.com
-ENGINE_API_KEY=your-auth-token
-MODEL_CONFIG_PATH=./config/model_config.json
+ALPHA_VANTAGE_API_KEY="your-api-key"
+ENGINE_URL="https://your-arthur-instance.com"
+ENGINE_API_KEY="your-auth-token"
+MODEL_CONFIG_PATH="./config/model_config.json"
+PROJECT_PATH = "./path/to/project"
 ```
 
 Load them in development with tools like [`python-dotenv`](https://github.com/theskumar/python-dotenv).
@@ -57,11 +58,11 @@ The project uses several configuration files located in the `/config` directory:
 - `eval_engine_config.json` - Evaluation engine settings
 - `logging_config.yaml` - Logging configurations
 
-### Model Configuration (`model_config.json`)
+### Model Configuration (`config/model_config.json`)
 This file contains model-specific settings and should include:
 - Model parameters and configurations
 - API endpoints and timeouts
-- Version control using `model_config.jsonTEMPLATE`
+- Version control using `config/model_config.jsonTEMPLATE`
 - Never commit actual model keys or sensitive parameters
 - Keep sensitive values in environment variables
 
@@ -90,12 +91,12 @@ This file contains model-specific settings and should include:
 ]
 ```
 
-### Evaluation Engine Configuration (`eval_engine_config.json`)
+### Evaluation Engine Configuration (`config/eval_engine_config.json`)
 This file manages evaluation engine settings:
 - Engine-specific parameters
 - Performance thresholds
 - Monitoring configurations
-- Use `eval_engine_config.jsonTEMPLATE` for version control
+- Use `config/eval_engine_config.jsonTEMPLATE` for version control
 - Keep actual configuration private
 - Store sensitive credentials in environment variables
 
@@ -117,7 +118,7 @@ This file manages evaluation engine settings:
 }
 ```
 
-### Logging Configuration (`logging_config.yaml`)
+### Logging Configuration (`config/logging_config.yaml`)
 This YAML file controls logging behavior:
 - Log levels and rotation policies
 - Output formats and destinations
@@ -167,6 +168,6 @@ Enable GitHub’s built-in secret scanning on your repository.
 - [x] All tokens are injected via env vars
 - [x] Secrets never appear in logs
 - [x] Token rotation plan is defined
-- [] Secrets scanning is part of CI or dev workflow
+- [x] Secrets scanning is part of CI or dev workflow
 
 ---

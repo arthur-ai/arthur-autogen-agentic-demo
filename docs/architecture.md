@@ -18,7 +18,7 @@ This document describes the internal structure of the Financial Analyst Agent pr
 
 ### Agent System
 The application uses a multi-agent architecture:
-
+<!-- Align bullet points, Showcase the difference between the image and the agent system -->
 1. **Orchestrator Agent**
    - Manages conversation flow and task delegation
    - Coordinates between user inputs and assistant responses
