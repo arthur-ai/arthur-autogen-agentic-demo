@@ -2,7 +2,7 @@
 
 <i>Make AI work for Everyone.</i>
 
-<div style="text-align: center;">
+<div align="center" style="text-align: center;">
 
 [![Arthur](https://github.com/arthur-ai/arthur-autogen-agentic-demo/blob/main/static/arthur-triangle-favicon.png?raw=true)](https://github.com/arthur-ai/arthur-autogen-agentic-demo/blob/main/static/arthur-triangle-favicon.png?raw=true)
 
