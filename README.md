@@ -2,7 +2,7 @@
 
 <i>Make AI work for Everyone.</i>
 
-[![Arthur](https://github.com/arthur-ai/arthur-autogen-agentic-demo/static/arthur-triangle-favicon.png)](https://github.com/arthur-ai/arthur-autogen-agentic-demo/static/arthur-triangle-favicon.png)
+[![Arthur](https://github.com/arthur-ai/arthur-autogen-agentic-demo/blob/main/static/arthur-triangle-favicon.png?raw=true)](https://github.com/arthur-ai/arthur-autogen-agentic-demo/blob/main/static/arthur-triangle-favicon.png?raw=true)
 [![Discord](https://img.shields.io/badge/Discord-Arthur-blue?logo=discord&logoColor=white)](https://discord.gg/tdfUAtaVHz)
 
 [Website](https://arthur.ai) - [Documentation](https://shield.docs.arthur.ai/docs) - [Talk to someone at Arthur](https://www.arthur.ai/arthur-book-a-demo)
@@ -45,11 +45,11 @@ You can use a `.env` file for local dev and load it via `dotenv` or your preferr
 
 ### ⚙️ Model Configuration
 
-Model parameters and routing are defined in `model_config.json`.
+Model parameters and routing are defined in `config/model_config.json`.
 
 ### 🎯 Eval Engine Configuration
 
-Evaluation tasks (if used) are configured in `arthur_engine_config.json`:
+Evaluation tasks (if used) are configured in `config/arthur_engine_config.json`:
 - Metrics to track (e.g., accuracy, response time)
 - Conditions for test prompts
 - Logging preferences (optional integration with Arthur's Eval Engine)
@@ -58,7 +58,7 @@ Evaluation tasks (if used) are configured in `arthur_engine_config.json`:
 git clone https://github.com/your-username/your-repo.git
 cd your-repo
 python -m venv .venv
-source .venv/bin/activate  # or .venv\Scriptsctivate on Windows
+source .venv/bin/activate  # or .venv\Scripts\activate on Windows
 pip install -r requirements.txt
 python main.py
 ```
