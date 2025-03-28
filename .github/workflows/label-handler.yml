@@ -1,0 +1,49 @@
+name: Label Handler
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request:
+    types: [synchronize]
+
+jobs:
+  add-label:
+    if: |
+      github.event.issue.pull_request != null &&
+      contains(github.event.comment.body, '/ready-for-release')
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Add label
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: ready-for-release
+
+  remove-label:
+    if: github.event.action == 'synchronize'
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Remove ready-for-release label
+        uses: actions-ecosystem/action-remove-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: ready-for-release
+
+      - name: Comment on PR
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ⚠️ A new commit was pushed to this pull request, so the `ready-for-release` label has been removed.
+            Please re-add the label by commenting `/ready-for-release` when it's ready again.
