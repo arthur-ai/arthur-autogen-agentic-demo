@@ -1,15 +1,13 @@
 # The Arthur AutoGen Agentic Deployment
 
-<i>Make AI work for Everyone.</i>
+<div align="center">
+   <img src="https://cdn.prod.website-files.com/6230fe4706acf355d38b2d54/65b98b3564bb58c88c0a1b66_arthur-logo-light-nav.svg" alt="Arthur AI Logo" width="300" style="background-color: white;"/>
 
-<div align="center" style="text-align: center;">
+   <i>Make AI work for Everyone.</i>
 
-[![Arthur](https://github.com/arthur-ai/arthur-autogen-agentic-demo/blob/main/static/arthur-triangle-favicon.png?raw=true)](https://github.com/arthur-ai/arthur-autogen-agentic-demo/blob/main/static/arthur-triangle-favicon.png?raw=true)
+   [![Discord](https://img.shields.io/badge/Discord-Arthur-blue?logo=discord&logoColor=white)](https://discord.gg/tdfUAtaVHz)
 
-[![Discord](https://img.shields.io/badge/Discord-Arthur-blue?logo=discord&logoColor=white)](https://discord.gg/tdfUAtaVHz)
-</div>
-
-[Website](https://arthur.ai) - [Documentation](https://shield.docs.arthur.ai/docs) - [Talk to someone at Arthur](https://www.arthur.ai/arthur-book-a-demo)
+   [Website](https://arthur.ai) - [Documentation](https://shield.docs.arthur.ai/docs) - [Talk to someone at Arthur](https://www.arthur.ai/arthur-book-a-demo)
 
 </div>
 
