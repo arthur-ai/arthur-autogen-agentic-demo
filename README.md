@@ -1,11 +1,13 @@
 <div align="center">
-   <img src="https://cdn.prod.website-files.com/6230fe4706acf355d38b2d54/65b98b3564bb58c88c0a1b66_arthur-logo-light-nav.svg" alt="Arthur AI Logo" width="300" style="background-color: white;"/>
 
-   <i>Make AI work for Everyone.</i>
+<img src="https://cdn.prod.website-files.com/5a749d2c4f343700013366d4/67eab9e594ec4accb58badeb_arthur-logo-symbol.svg" alt="Arthur AI Logo" width="150"/>
 
-   [![Discord](https://img.shields.io/badge/Discord-Arthur-blue?logo=discord&logoColor=white)](https://discord.gg/tdfUAtaVHz)
+<i>Make AI work for Everyone.</i>
 
-   [Website](https://arthur.ai) - [Documentation](https://shield.docs.arthur.ai/docs) - [Talk to someone at Arthur](https://www.arthur.ai/arthur-book-a-demo)
+![Autogen CI](https://github.com/arthur-ai/arthur-autogen-agentic-demo/actions/workflows/checks.yml/badge.svg?branch=develop)
+[![Discord](https://img.shields.io/badge/Discord-Arthur-blue?logo=discord&logoColor=white)](https://discord.gg/tdfUAtaVHz)
+
+[Website](https://arthur.ai) - [Documentation](https://shield.docs.arthur.ai/docs) - [Talk to someone at Arthur](https://www.arthur.ai/arthur-book-a-demo)
 
 </div>
 
